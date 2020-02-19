@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Employee Cards</string>
+    <string name="search_hint">Search for your favourite manager</string>
+    <string name="name_label">Name:</string>
+    <string name="email_label">Email:</string>
+    <string name="business_unit_label">Business Unit:</string>
+    <string name="department_label">Department:</string>
+    <string name="local_office_label">Local Office:</string>
+    <string name="n_a">N/A</string>
+</resources>

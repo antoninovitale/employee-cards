@@ -1,0 +1,86 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply from: '../config.gradle'
+apply plugin: "de.mannodermaus.android-junit5"
+
+android {
+    compileSdkVersion compile_sdk_version
+    buildToolsVersion build_tools_version
+    defaultConfig {
+        applicationId application_id
+        minSdkVersion min_sdk_version
+        targetSdkVersion target_sdk_version
+        multiDexEnabled true
+        versionCode version_code
+        versionName version_name
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard-rules.pro'
+            applicationIdSuffix ".debug"
+            debuggable true
+            testCoverageEnabled = false
+        }
+
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), '../proguard-rules.pro'
+            debuggable false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+
+    implementation 'androidx.core:core-ktx:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation "androidx.constraintlayout:constraintlayout:$androidx_constraint_layout_version"
+    implementation "androidx.recyclerview:recyclerview:$androidx_recyclerview_version"
+    implementation "androidx.cardview:cardview:$androidx_cardview_version"
+    implementation "androidx.lifecycle:lifecycle-runtime:$androidx_lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$androidx_lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-common-java8:$androidx_lifecycle_version"
+    implementation 'com.google.android.material:material:1.1.0'
+
+    implementation "com.github.rubensousa:gravitysnaphelper:$gravity_snaphelper_version"
+
+    implementation "io.reactivex.rxjava2:rxjava:$rx_java_version"
+    implementation "io.reactivex.rxjava2:rxkotlin:$rx_kotlin_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rx_android_version"
+
+    api "com.squareup.retrofit2:retrofit:$retrofit_version"
+    api "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    api "com.squareup.okhttp3:logging-interceptor:$okhttp_version"
+    api "com.squareup.okhttp3:okhttp:$okhttp_version"
+    api "com.squareup.retrofit2:converter-moshi:$retrofit_version"
+
+    api "com.squareup.moshi:moshi:$moshi_version"
+    api "com.squareup.moshi:moshi-kotlin:$moshi_version"
+    implementation "se.ansman.kotshi:api:$kotshi_version"
+    kapt "se.ansman.kotshi:compiler:$kotshi_version"
+
+    implementation "com.google.dagger:dagger:$dagger_version"
+    implementation "com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.code.findbugs:jsr305:$findbugs_version"
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junit_jupiter_version"
+    testImplementation "org.mockito:mockito-core:$mockito_version"
+    testImplementation "com.nhaarman:mockito-kotlin:$mockito_kotlin_version"
+}
